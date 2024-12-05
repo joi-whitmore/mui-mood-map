@@ -5,14 +5,14 @@
       "title": "Meditate for 15 minutes",
       "description": "Morning meditation to start the day",
       "taskType": "Energized",
-      "isCompleted": false
+      "isCompleted": true
     },
     {
       "id": "2",
       "title": "Write a Blog Post",
       "description": "Draft an outline for a new blog post on React state management",
       "taskType": "Creative",
-      "isCompleted": false
+      "isCompleted": true
     },
     {
       "id": "a1eb",
@@ -26,7 +26,7 @@
       "title": "Joi's healing adventure",
       "taskType": "Focused",
       "description": "Time to get your healing on",
-      "isCompleted": false
+      "isCompleted": true
     }
   ]
 }

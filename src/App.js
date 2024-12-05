@@ -9,28 +9,29 @@ import TaskInput from './components/TaskInput';
 import CssBaseline from '@mui/material/CssBaseline';
 
 function App() {
-    // Step 1: Manage state for tasks and selected mood
+    // Manage state for tasks and selected mood
     const [selectedMood, setSelectedMood] = useState('');
     const [tasks, setTasks] = useState([]);
 
-    // Step 2: useEffect to fetch tasks when component mounts
+    // Fetch tasks from JSON Server when the component mounts
     useEffect(() => {
-        axios.get('http://localhost:5001/tasks')  // Ensure this URL matches your JSON Server port
+        console.log('Fetching tasks from JSON Server...');
+        axios.get('http://localhost:5001/tasks')
             .then((response) => {
                 console.log('Tasks fetched:', response.data);
-                setTasks(response.data);  // Set tasks with the data fetched from JSON Server
+                setTasks(response.data);
             })
             .catch((error) => {
                 console.error('Error fetching tasks:', error);
             });
-    }, []);  // Empty dependency array means this effect runs only once after the initial render
+    }, []);
 
-    // Step 3: Function to handle mood selection
+    // Function to handle mood selection
     const handleMoodSelect = (mood) => {
         setSelectedMood(mood);
     };
 
-    // Step 4: Function to handle adding a new task
+    // Function to add a new task via POST request
     const handleAddTask = (task) => {
         axios.post('http://localhost:5001/tasks', task)
             .then((response) => {
@@ -41,15 +42,17 @@ function App() {
             });
     };
 
-    // Step 5: Function to toggle task completion
-    const handleToggleTaskComplete = (index) => {
-        const taskToUpdate = tasks[index];
+    // Function to toggle task completion via PATCH request
+    const handleToggleTaskComplete = (id) => {
+        const taskToUpdate = tasks.find((task) => task.id === id);
+        if (!taskToUpdate) return;
+
         const updatedTask = { ...taskToUpdate, isCompleted: !taskToUpdate.isCompleted };
 
-        axios.patch(`http://localhost:5001/tasks/${taskToUpdate.id}`, updatedTask)
+        axios.patch(`http://localhost:5001/tasks/${id}`, updatedTask)
             .then((response) => {
                 setTasks((prevTasks) =>
-                    prevTasks.map((task, i) => (i === index ? response.data : task))
+                    prevTasks.map((task) => (task.id === id ? response.data : task))
                 );
             })
             .catch((error) => {
@@ -57,7 +60,13 @@ function App() {
             });
     };
 
-    // Step 6: Define the theme for dark mode
+    // Filter tasks based on selected mood
+    const filteredTasks = tasks.filter((task) => {
+        if (!selectedMood) return true; // Show all tasks if no mood is selected
+        return task.taskType.toLowerCase() === selectedMood.toLowerCase();
+    });
+
+    // Create a dark theme for the application
     const darkTheme = createTheme({
         palette: {
             mode: 'dark',
@@ -72,7 +81,6 @@ function App() {
         },
     });
 
-    // Step 7: Return the UI elements
     return (
         <ThemeProvider theme={darkTheme}>
             <CssBaseline />
@@ -90,7 +98,7 @@ function App() {
                     <h1 style={{ color: '#ffffff' }}>Welcome to MUI Mood Map!</h1>
                     <MoodSelector onMoodSelect={handleMoodSelect} />
                     <TaskInput onAddTask={handleAddTask} />
-                    <ToDoList tasks={tasks} mood={selectedMood} onToggleTaskComplete={handleToggleTaskComplete} />
+                    <ToDoList tasks={filteredTasks} mood={selectedMood} onToggleTaskComplete={handleToggleTaskComplete} />
                 </Box>
             </Container>
         </ThemeProvider>

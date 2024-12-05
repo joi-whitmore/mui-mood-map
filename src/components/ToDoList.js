@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, Typography, Box, Checkbox, Grid } from '@mui/material';
+import { Card, Typography, Box, Checkbox } from '@mui/material';
 
 function ToDoList({ tasks = [], mood, onToggleTaskComplete }) {
     // Filter tasks based on the selected mood
@@ -10,62 +10,74 @@ function ToDoList({ tasks = [], mood, onToggleTaskComplete }) {
 
     return (
         <Box display="flex" flexDirection="column" gap={3} p={2}>
-            <Typography variant="h4" gutterBottom color="text.primary">
+            <Typography variant="h4" gutterBottom color="text.primary" textAlign="center">
                 Task List
             </Typography>
-            <Grid container spacing={3}>
-                {filteredTasks.map((task, index) => (
-                    <Grid item xs={12} key={index}>
-                        <Card
-                            variant="outlined"
-                            sx={{
-                                backgroundColor: 'background.paper',
-                                padding: 2,
-                                display: 'flex',
-                                alignItems: 'center',
-                                gap: 2,
+            <Box display="flex" flexDirection="column" gap={3}>
+                {filteredTasks.map((task) => (
+                    <Card
+                        key={task.id} // Changed from index to task.id
+                        variant="outlined"
+                        sx={{
+                            backgroundColor: 'background.paper',
+                            padding: 2,
+                            display: 'flex',
+                            alignItems: 'center',
+                            gap: 2,
+                            boxShadow: '0px 2px 10px rgba(0, 0, 0, 0.1)',
+                            borderRadius: 2,
+                        }}
+                    >
+                        <Checkbox
+                            checked={task.isCompleted}
+                            onChange={() => {
+                                console.log(`Toggling task completion for: ${task.title}`);
+                                onToggleTaskComplete(task.id);
                             }}
-                        >
-                            <Checkbox
-                                checked={task.isCompleted}
-                                onChange={() => onToggleTaskComplete(index)}
-                                sx={{ color: 'primary.main', marginRight: 2 }}
-                            />
-                            <Box display="flex" flexDirection="column" flexGrow={1}>
+                            sx={{
+                                color: 'primary.main',
+                                marginRight: 2,
+                                '&.Mui-checked': {
+                                    color: 'primary.main',
+                                },
+                            }}
+                        />
+                        <Box display="flex" flexDirection="column" flexGrow={1}>
+                            <Typography
+                                variant="h6"
+                                className={`task-title-${task.id}`} // Adding a unique class name
+                                sx={{
+                                    fontWeight: 'bold',
+                                    textDecoration: task.isCompleted ? 'line-through' : 'none',
+                                    color: 'text.primary',
+                                }}
+                            >
+                                {task.title}
+                            </Typography>
+                            {task.description && (
                                 <Typography
-                                    variant="h6"
+                                    variant="body2"
+                                    className={`task-description-${task.id}`} // Adding a unique class name
                                     sx={{
-                                        fontWeight: 'bold',
                                         textDecoration: task.isCompleted ? 'line-through' : 'none',
-                                        color: 'text.primary',
+                                        color: 'text.secondary',
+                                        marginTop: 0.5,
                                     }}
                                 >
-                                    {task.title}
+                                    {task.description}
                                 </Typography>
-                                {task.description && (
-                                    <Typography
-                                        variant="body2"
-                                        sx={{
-                                            textDecoration: task.isCompleted ? 'line-through' : 'none',
-                                            color: 'text.secondary',
-                                            marginTop: 0.5,
-                                        }}
-                                    >
-                                        {task.description}
-                                    </Typography>
-                                )}
-                            </Box>
-                            <Typography
-                                color="text.secondary"
-                                variant="body2"
-                                sx={{ marginLeft: 'auto', marginRight: 1 }}
-                            >
-                                [{task.taskType}]
-                            </Typography>
-                        </Card>
-                    </Grid>
+                            )}
+                        </Box>
+                        <Typography
+                            color="text.secondary"
+                            variant="body2"
+                            sx={{ marginLeft: 'auto', marginRight: 1 }}
+                        >
+                            [{task.taskType}]
+                        </Typography>
+                    </Card>
                 ))}
-            </Grid>
+            </Box>
         </Box>
     );
 }

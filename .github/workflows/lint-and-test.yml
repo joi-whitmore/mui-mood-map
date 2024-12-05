@@ -1,0 +1,38 @@
+name: Lint and Test
+
+on:
+  push:
+    branches: [main] # This runs on every push to main branch
+  pull_request:
+    branches: [main] # This runs on pull requests to the main branch
+
+jobs:
+  lint-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Checkout the repository
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      # Step 2: Set up Node.js
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '23.3.0' # You can change this to match your project version
+
+      # Step 3: Install dependencies
+      - name: Install dependencies
+        run: npm install
+
+      # Step 4: Run Linting
+      - name: Run ESLint
+        run: npm run lint
+        env:
+          CI: true
+
+      # Step 5: Run Tests
+      - name: Run Tests
+        run: npm test
+        env:
+          CI: true

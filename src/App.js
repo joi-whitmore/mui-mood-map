@@ -104,13 +104,7 @@ function App() {
             <CssBaseline />
             <Container
                 maxWidth="sm"
-                sx={{
-                    backgroundColor: 'background.paper',
-                    padding: 4,
-                    borderRadius: 2,
-                    boxShadow: '0px 4px 20px rgba(0, 0, 0, 0.3)',
-                    marginTop: 5,
-                }}
+                className="container"
             >
                 <Box textAlign="center">
                     <h1 style={{ color: '#ffffff' }}>Mood Based ToDo List</h1>

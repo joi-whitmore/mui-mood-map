@@ -27,9 +27,7 @@ function TaskInput({ onAddTask }) {
                 value={taskTitle}
                 onChange={(e) => setTaskTitle(e.target.value)}
                 variant="outlined"
-                InputLabelProps={{
-                    style: { color: '#b0b0b0' }, // Light grey label for dark mode
-                }}
+                className={taskTitle ? 'task-input' : ''}
                 sx={{
                     backgroundColor: 'background.paper',
                     color: 'text.primary',

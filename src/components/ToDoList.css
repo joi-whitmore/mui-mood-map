@@ -1,0 +1,50 @@
+/* src/components/ToDoList.css */
+:root {
+    --background-paper: #fff;
+    --primary-main: #1976d2;
+    --text-primary: #333;
+    --text-secondary: #666;
+}
+
+.task-card {
+    background-color: var(--background-paper);
+    padding: 16px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+.task-title {
+    font-weight: bold;
+    text-decoration: none; /* Default value */
+    text-align: left;
+}
+
+.task-title.completed {
+    text-decoration: line-through;
+}
+
+.task-description {
+    text-decoration: none;
+    text-align: left;
+    color: var(--text-secondary);
+    margin-top: 0.5rem;
+}
+
+.task-description.completed {
+    text-decoration: line-through;
+}
+
+.task-type {
+    text-align: left;
+}
+
+.checkbox-custom {
+    margin-right: 8px; /* Equivalent to marginRight: 2 in MUI's spacing system */
+}
+
+.checkbox-custom.Mui-checked {
+    color: var(--primary-main);
+}

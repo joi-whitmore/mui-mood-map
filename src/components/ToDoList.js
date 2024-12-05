@@ -1,6 +1,7 @@
 import React from 'react';
 import { Card, Typography, Box, Checkbox, IconButton } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
+import './ToDoList.css';
 
 function ToDoList({ tasks = [], mood, onToggleTaskComplete, onDeleteTask }) {
     // Filter tasks based on the selected mood
@@ -19,24 +20,15 @@ function ToDoList({ tasks = [], mood, onToggleTaskComplete, onDeleteTask }) {
                     <Card
                         key={task.id}
                         variant="outlined"
-                        sx={{
-                            backgroundColor: 'background.paper',
-                            padding: 2,
-                            display: 'flex',
-                            alignItems: 'center',
-                            gap: 2,
-                            boxShadow: '0px 2px 10px rgba(0, 0, 0, 0.1)',
-                            borderRadius: 2,
-                        }}
+                        className="task-card"
                     >
                         <Checkbox
                             checked={task.isCompleted}
                             onChange={() => {
                                 onToggleTaskComplete(task.id);
                             }}
+                            className="checkbox-custom"
                             sx={{
-                                color: 'primary.main',
-                                marginRight: 2,
                                 '&.Mui-checked': {
                                     color: 'primary.main',
                                 },
@@ -45,24 +37,14 @@ function ToDoList({ tasks = [], mood, onToggleTaskComplete, onDeleteTask }) {
                         <Box display="flex" flexDirection="column" flexGrow={1}>
                             <Typography
                                 variant="h6"
-                                className={`task-title-${task.id}`}
-                                sx={{
-                                    fontWeight: 'bold',
-                                    textDecoration: task.isCompleted ? 'line-through' : 'none',
-                                    color: 'text.primary',
-                                }}
+                                className={`task-title task-title-${task.id} ${task.isCompleted ? 'completed' : ''}`}
                             >
                                 {task.title}
                             </Typography>
                             {task.description && (
                                 <Typography
                                     variant="body2"
-                                    className={`task-description-${task.id}`}
-                                    sx={{
-                                        textDecoration: task.isCompleted ? 'line-through' : 'none',
-                                        color: 'text.secondary',
-                                        marginTop: 0.5,
-                                    }}
+                                    className={`task-description ${task.isCompleted ? 'completed' : ''}`}
                                 >
                                     {task.description}
                                 </Typography>
@@ -71,7 +53,7 @@ function ToDoList({ tasks = [], mood, onToggleTaskComplete, onDeleteTask }) {
                         <Typography
                             color="text.secondary"
                             variant="body2"
-                            sx={{ marginLeft: 'auto', marginRight: 1 }}
+                            className="task-type"
                         >
                             [{task.taskType}]
                         </Typography>

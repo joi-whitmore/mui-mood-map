@@ -100,7 +100,7 @@ This project is licensed under the **MIT License**.
 For any questions or suggestions, feel free to reach out:
 
 - **GitHub**: [joi-whitmore](https://github.com/joi-whitmore)
-- **Email**: [joi@example.com](mailto:joi@example.com) (replace with your actual email address)
+- **Email**: [joiwhitmore@gmail.com](mailto:joiwhitmore@gmail.com) (replace with your actual email address)
 
 ---
 Thank you for checking out **MUI Mood Map**! Stay productive and aligned with your moods! 😊

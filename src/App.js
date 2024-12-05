@@ -13,12 +13,17 @@ function App() {
     const [selectedMood, setSelectedMood] = useState('');
     const [tasks, setTasks] = useState([]);
 
+    const moodMapping = {
+        Energized: "High Energy",
+        Focused: "Focused",
+        Creative: "Creative",
+        Tired: "Low Energy",
+    };
+
     // Fetch tasks from JSON Server when the component mounts
     useEffect(() => {
-        console.log('Fetching tasks from JSON Server...');
         axios.get('http://localhost:5001/tasks')
             .then((response) => {
-                console.log('Tasks fetched:', response.data);
                 setTasks(response.data);
             })
             .catch((error) => {
@@ -28,7 +33,8 @@ function App() {
 
     // Function to handle mood selection
     const handleMoodSelect = (mood) => {
-        setSelectedMood(mood);
+        const mappedMood = moodMapping[mood] || mood; // Map the mood, or use it as-is if there's no match
+        setSelectedMood(mappedMood);
     };
 
     // Function to add a new task via POST request
@@ -57,6 +63,18 @@ function App() {
             })
             .catch((error) => {
                 console.error('Error updating task:', error);
+            });
+    };
+
+    // Function to delete a task via DELETE request
+    const handleDeleteTask = (id) => {
+        axios.delete(`http://localhost:5001/tasks/${id}`)
+            .then(() => {
+                setTasks((prevTasks) => prevTasks.filter((task) => task.id !== id));
+                console.log(`Task with ID ${id} deleted.`);
+            })
+            .catch((error) => {
+                console.error('Error deleting task:', error);
             });
     };
 
@@ -95,10 +113,15 @@ function App() {
                 }}
             >
                 <Box textAlign="center">
-                    <h1 style={{ color: '#ffffff' }}>Welcome to MUI Mood Map!</h1>
+                    <h1 style={{ color: '#ffffff' }}>Mood Based ToDo List</h1>
                     <MoodSelector onMoodSelect={handleMoodSelect} />
                     <TaskInput onAddTask={handleAddTask} />
-                    <ToDoList tasks={filteredTasks} mood={selectedMood} onToggleTaskComplete={handleToggleTaskComplete} />
+                    <ToDoList
+                        tasks={filteredTasks}
+                        mood={selectedMood}
+                        onToggleTaskComplete={handleToggleTaskComplete}
+                        onDeleteTask={handleDeleteTask}
+                    />
                 </Box>
             </Container>
         </ThemeProvider>

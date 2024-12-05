@@ -5,28 +5,28 @@
       "title": "Meditate for 15 minutes",
       "description": "Morning meditation to start the day",
       "taskType": "Energized",
-      "isCompleted": true
+      "isCompleted": false
     },
     {
       "id": "2",
       "title": "Write a Blog Post",
       "description": "Draft an outline for a new blog post on React state management",
       "taskType": "Creative",
-      "isCompleted": true
-    },
-    {
-      "id": "a1eb",
-      "title": "New task",
-      "taskType": "Focused",
-      "description": "Task description",
       "isCompleted": false
     },
     {
-      "id": "8be3",
-      "title": "Joi's healing adventure",
-      "taskType": "Focused",
-      "description": "Time to get your healing on",
-      "isCompleted": true
+      "id": "8939",
+      "title": "Take a nap",
+      "taskType": "Low Energy",
+      "description": "Get in your snuggly bed and take a nap",
+      "isCompleted": false
+    },
+    {
+      "id": "b738",
+      "title": "High energy",
+      "taskType": "High Energy",
+      "description": "requires me to be super productive",
+      "isCompleted": false
     }
   ]
 }

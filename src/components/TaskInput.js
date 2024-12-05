@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { TextField, Button, Box, MenuItem, Select, InputLabel, FormControl } from '@mui/material';
+import {TextField, Button, Box, MenuItem, Select, InputLabel, FormControl} from '@mui/material';
 
 function TaskInput({ onAddTask }) {
     const [taskTitle, setTaskTitle] = useState('');
@@ -42,9 +42,6 @@ function TaskInput({ onAddTask }) {
                 variant="outlined"
                 multiline
                 rows={2}
-                InputLabelProps={{
-                    style: { color: '#b0b0b0' },
-                }}
                 sx={{
                     backgroundColor: 'background.paper',
                     color: 'text.primary',
@@ -63,7 +60,7 @@ function TaskInput({ onAddTask }) {
                         backgroundColor: 'background.paper',
                         color: 'text.primary',
                     }}
-                >
+               >
                     <MenuItem value="Creative">Creative</MenuItem>
                     <MenuItem value="Focused">Focused</MenuItem>
                     <MenuItem value="High Energy">High Energy</MenuItem>

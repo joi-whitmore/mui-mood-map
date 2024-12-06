@@ -31,34 +31,38 @@ Follow these steps to set up the project locally.
 
 1. **Clone the Repository**
 
-   ```bash
-   git clone https://github.com/joi-whitmore/mui-mood-map.git
-   cd mui-mood-map
-   ```
+
+bash
+git clone https://github.com/joi-whitmore/mui-mood-map.git
+cd mui-mood-map
+
 
 2. **Install Dependencies**
 
-   ```bash
-   npm install
-   ```
+
+bash
+npm install
+
 
 3. **Start JSON Server**
 
    To run the JSON server that persists the tasks:
 
-   ```bash
-   json-server --watch db.json --port 5001
-   ```
 
-   Make sure the `db.json` file is in the root directory of your project. The server will run at [http://localhost:5001](http://localhost:5001).
+bash
+json-server --watch db.json --port 5001
+
+
+Make sure the db.json file is in the root directory of your project. The server will run at [http://localhost:5001](http://localhost:5001).
 
 4. **Start the React Application**
 
-   ```bash
-   npm start
-   ```
 
-   The application will run on [http://localhost:3000](http://localhost:3000).
+bash
+npm start
+
+
+The application will run on [http://localhost:3000](http://localhost:3000).
 
 ### Usage Instructions
 
@@ -68,17 +72,17 @@ Follow these steps to set up the project locally.
 
 ## Folder Structure
 
-- **`/src`**: Contains all React code for the components.
-- **`/components`**: Components such as `MoodSelector`, `TaskInput`, and `ToDoList` are in this folder.
-- **`db.json`**: A simple JSON file used to persist task data via JSON Server.
+- **/src**: Contains all React code for the components.
+- **/components**: Components such as MoodSelector, TaskInput, and ToDoList are in this folder.
+- **db.json**: A simple JSON file used to persist task data via JSON Server.
 
 ## Available Endpoints
 
 The JSON server runs at [http://localhost:5001](http://localhost:5001), and the following endpoints are available:
 
-- **GET** `/tasks`: Fetch all tasks.
-- **POST** `/tasks`: Add a new task.
-- **PATCH** `/tasks/:id`: Update a specific task.
+- **GET** /tasks: Fetch all tasks.
+- **POST** /tasks: Add a new task.
+- **PATCH** /tasks/:id: Update a specific task.
 
 ## Future Enhancements
 
@@ -104,4 +108,3 @@ For any questions or suggestions, feel free to reach out:
 
 ---
 Thank you for checking out **MUI Mood Map**! Stay productive and aligned with your moods! 😊
-

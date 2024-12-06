@@ -6,7 +6,7 @@ const useTasks = () => {
     const [tasks, setTasks] = useState([]);
 
     useEffect(() => {
-        axios.get('http://localhost:5001/tasks')
+        axios.get('http://localhost:5003/api/tasks')
             .then((response) => {
                 setTasks(response.data);
             })
@@ -16,7 +16,7 @@ const useTasks = () => {
     }, []);
 
     const addTask = (task) => {
-        axios.post('http://localhost:5001/tasks', task)
+        axios.post('http://localhost:5003/api/tasks', task)
             .then((response) => {
                 setTasks((prevTasks) => [...prevTasks, response.data]);
             })
@@ -31,7 +31,7 @@ const useTasks = () => {
 
         const updatedTask = { ...taskToUpdate, isCompleted: !taskToUpdate.isCompleted };
 
-        axios.patch(`http://localhost:5001/tasks/${id}`, updatedTask)
+        axios.patch(`http://localhost:5003/api/tasks/${id}`, updatedTask)
             .then((response) => {
                 setTasks((prevTasks) =>
                     prevTasks.map((task) => (task.id === id ? response.data : task))
@@ -43,7 +43,7 @@ const useTasks = () => {
     };
 
     const deleteTask = (id) => {
-        axios.delete(`http://localhost:5001/tasks/${id}`)
+        axios.delete(`http://localhost:5003/api/tasks/${id}`)
             .then(() => {
                 setTasks((prevTasks) => prevTasks.filter((task) => task.id !== id));
                 console.log(`Task with ID ${id} deleted.`);

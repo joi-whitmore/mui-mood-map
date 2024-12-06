@@ -8,15 +8,16 @@ Welcome to the **MUI Mood Map**! This project is a mood-based task prioritizer d
 - **Mood Selection**: Select your current mood (e.g., Energized, Focused, Creative, Tired) to see tasks that fit best with that mood.
 - **Task Filtering**: Tasks are filtered based on your mood to help you decide which to tackle, depending on how you feel.
 - **Dark Mode Support**: The app features a dark mode design with mood-based button colors.
-- **Task Persistence**: Tasks are persisted using JSON Server, ensuring they stay even if the page is refreshed.
+- **Task Persistence**: Tasks are persisted using a PostgreSQL database, ensuring they stay even if the page is refreshed.
 - **Mark Task as Completed**: Users can check off tasks as completed, which applies a strikethrough effect to the text.
 
 ## Technologies Used
 
 - **React**: Frontend JavaScript library for building the user interface.
 - **Material UI**: For UI components and theming.
-- **JSON Server**: To simulate a backend server and persist tasks data.
-- **Axios**: For making API requests to the JSON Server.
+- **Node.js & Express**: For creating the backend API.
+- **PostgreSQL**: For persisting tasks data.
+- **Axios**: For making API requests to the backend server.
 
 ## Project Setup
 
@@ -25,64 +26,77 @@ Follow these steps to set up the project locally.
 ### Prerequisites
 
 - **Node.js** and **npm** installed.
+- **PostgreSQL** installed and running.
 - **Git** for version control.
 
 ### Installation Steps
 
 1. **Clone the Repository**
 
-
-bash
-git clone https://github.com/joi-whitmore/mui-mood-map.git
-cd mui-mood-map
-
+   ```bash
+   git clone https://github.com/joi-whitmore/mui-mood-map.git
+   cd mui-mood-map
+   ```
 
 2. **Install Dependencies**
 
+   ```bash
+   npm install
+   ```
 
-bash
-npm install
+3. **Set Up PostgreSQL Database**
 
+   - Create a PostgreSQL database named `mood_map_db`.
+   - Update the database configuration in `backend/config/config.json` with your PostgreSQL credentials.
 
-3. **Start JSON Server**
+4. **Run Migrations**
 
-   To run the JSON server that persists the tasks:
+   To set up the database tables:
 
+   ```bash
+   npx sequelize-cli db:migrate
+   ```
 
-bash
-json-server --watch db.json --port 5001
+5. **Start the Backend Server**
 
+   To run the Express server that handles the API:
 
-Make sure the db.json file is in the root directory of your project. The server will run at [http://localhost:5001](http://localhost:5001).
+   ```bash
+   cd backend
+   npm run dev
+   ```
 
-4. **Start the React Application**
+   The server will run at [http://localhost:5003](http://localhost:5003).
 
+6. **Start the React Application**
 
-bash
-npm start
+   ```bash
+   npm start
+   ```
 
-
-The application will run on [http://localhost:3000](http://localhost:3000).
+   The application will run on [http://localhost:3000](http://localhost:3000).
 
 ### Usage Instructions
 
 - **Add Task**: Use the "Task Title", "Task Description", and "Task Type" fields to create a new task, then click "Add Task".
 - **Select Mood**: Choose your current mood (Energized, Focused, Creative, Tired) to filter tasks.
 - **Complete Task**: Check off a task to mark it as completed.
+- **Delete Task**: Remove tasks that are no longer needed.
 
 ## Folder Structure
 
-- **/src**: Contains all React code for the components.
-- **/components**: Components such as MoodSelector, TaskInput, and ToDoList are in this folder.
-- **db.json**: A simple JSON file used to persist task data via JSON Server.
+- **`/src`**: Contains all React code for the components.
+- **`/components`**: Components such as `MoodSelector`, `TaskInput`, and `ToDoList` are in this folder.
+- **`/backend`**: Contains the backend Express server, database models, and routes.
 
 ## Available Endpoints
 
-The JSON server runs at [http://localhost:5001](http://localhost:5001), and the following endpoints are available:
+The backend server runs at [http://localhost:5003](http://localhost:5003), and the following endpoints are available:
 
-- **GET** /tasks: Fetch all tasks.
-- **POST** /tasks: Add a new task.
-- **PATCH** /tasks/:id: Update a specific task.
+- **GET** `/tasks`: Fetch all tasks.
+- **POST** `/tasks`: Add a new task.
+- **PATCH** `/tasks/:id`: Update a specific task.
+- **DELETE** `/tasks/:id`: Delete a specific task.
 
 ## Future Enhancements
 
@@ -108,3 +122,4 @@ For any questions or suggestions, feel free to reach out:
 
 ---
 Thank you for checking out **MUI Mood Map**! Stay productive and aligned with your moods! 😊
+
